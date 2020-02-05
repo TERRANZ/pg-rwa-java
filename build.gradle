@@ -1,0 +1,144 @@
+buildscript {
+    ext {
+        gradleFile = { s -> "${rootDir}/gradle/${s}".toString() }
+        DEFAULT_IGNORE_FAILURES = false
+        DEFAULT_REPORT_HTML = 'true'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.franzbecker:gradle-lombok:1.14")
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'org.springframework.boot'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    google()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+apply plugin: 'io.franzbecker.gradle-lombok'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    google()
+    jcenter()
+    maven { url "https://repo.spring.io/libs-milestone" }
+    maven { url "https://repo.spring.io/libs-snapshot" }
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://scm.devfactory.com/nexus/content/repositories/df-thirdparty' }
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.apache.tinkerpop:gremlin-driver:${gremlin_version}")
+    compile("commons-io:commons-io:2.6")
+    compileOnly("org.projectlombok:lombok")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testImplementation("org.apache.tinkerpop:tinkergraph-gremlin:${gremlin_version}")
+    testImplementation("com.github.stefanbirkner:system-rules:1.18.0")
+    testImplementation("org.assertj:assertj-core:3.11.0")
+    testImplementation("pl.pojo:pojo-tester:0.7.6")
+}
+
+jacocoTestReport {
+    reports.xml.enabled = true
+    reports.html.enabled = true
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'test/**',
+                    '/*Test*.class',
+                    '**/common/**',
+                    '**/dto/**',
+                    '**/exceptions/**',
+                    '**/model/**',
+                    '**/neo4j/**',
+                    '**/es/**',
+                    '**/lambda/**'
+            ])
+        })
+    }
+}
+
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+checkstyle {
+    toolVersion = '7.5'
+    ignoreFailures = getSafeProperty(project, 'ignoreFailures', DEFAULT_IGNORE_FAILURES)
+    configFile = file("${project.rootDir}/static-analisys-config/checkstyle/checkstyle.xml")
+}
+
+pmd {
+    ignoreFailures = getSafeProperty(project, 'ignoreFailures', DEFAULT_IGNORE_FAILURES)
+    rulePriority = 3
+    consoleOutput = false
+    toolVersion = '5.5.5'
+    sourceSets = [sourceSets.main]
+    ruleSetFiles = files("${project.rootDir}/static-analisys-config/pmd/ruleset.xml")
+}
+
+findbugs {
+    showProgress = false
+    ignoreFailures = getSafeProperty(project, 'ignoreFailures', DEFAULT_IGNORE_FAILURES)
+}
+
+def htmlReporting = getSafeProperty(project, 'htmlReporting', DEFAULT_REPORT_HTML) == "true"
+
+def setReporting = {
+    it.xml.enabled = !htmlReporting
+    it.html.enabled = htmlReporting
+}
+
+tasks.withType(Pmd) {
+    reports { setReporting(it) }
+}
+
+tasks.withType(FindBugs) {
+    reports { setReporting(it) }
+}
+
+tasks.withType(Checkstyle) {
+    reports { setReporting(it) }
+}
+
+static def getSafeProperty(project, key, defaultValue) {
+    return project.findProperty(key) ?: defaultValue
+}
+
+test {
+    finalizedBy jacocoTestReport
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+        classDumpDir = file("$buildDir/jacoco/classpathdumps")
+    }
+}
