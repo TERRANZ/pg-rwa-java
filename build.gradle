@@ -57,11 +57,11 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    implementation("org.apache.tinkerpop:tinkergraph-gremlin:${gremlin_version}")
     compile("org.apache.tinkerpop:gremlin-driver:${gremlin_version}")
     compile("commons-io:commons-io:2.6")
     compileOnly("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-    testImplementation("org.apache.tinkerpop:tinkergraph-gremlin:${gremlin_version}")
     testImplementation("com.github.stefanbirkner:system-rules:1.18.0")
     testImplementation("org.assertj:assertj-core:3.11.0")
     testImplementation("pl.pojo:pojo-tester:0.7.6")
