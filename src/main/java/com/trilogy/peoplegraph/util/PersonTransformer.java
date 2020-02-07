@@ -25,7 +25,7 @@ public class PersonTransformer {
     }
 
     @SuppressWarnings("unchecked")
-    public static Object getProperty(Map<Object, Object> values, Object key) {
+    public static Object getProperty(Map values, String key) {
         Object object = values.get(key);
         if (object instanceof Collection) {
             return ((Collection) object).stream().findFirst().orElse(null);

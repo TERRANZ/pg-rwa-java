@@ -7,6 +7,8 @@ import lombok.Data;
 @Builder
 public class Person {
 
+    public static final String LABEL = "person";
+
     private String id;
     private String firstName;
     private String lastName;
