@@ -23,8 +23,7 @@ public class PersonService {
     }
 
     public List<Person> findAll() {
-        final List<Map<String, Object>> values = traversal.V().hasLabel(Person.LABEL)
-            .valueMap(Properties.ID).toList();
+        final List<Map<String, Object>> values = traversal.V().hasLabel(Person.LABEL).valueMap(Properties.ID).toList();
         final List<Person> persons = new ArrayList<>();
         for (final Map<String, Object> val : values) {
             final String userId = PersonTransformer.getProperty(val, Properties.ID).toString();

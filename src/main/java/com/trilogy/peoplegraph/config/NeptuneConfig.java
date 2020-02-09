@@ -28,11 +28,11 @@ public class NeptuneConfig implements INeptuneConfig {
             return TinkerGraph.open().traversal();
         } else {
             final Cluster cluster = Cluster.build()
-                .addContactPoint(neptuneProperties.getHost())
-                .port(neptuneProperties.getPort())
-                .maxContentLength(MAX_CONTENT_LENGTH)
-                .enableSsl(neptuneProperties.isEnableSsl())
-                .create();
+                    .addContactPoint(neptuneProperties.getHost())
+                    .port(neptuneProperties.getPort())
+                    .maxContentLength(MAX_CONTENT_LENGTH)
+                    .enableSsl(neptuneProperties.isEnableSsl())
+                    .create();
             return EmptyGraph.instance().traversal().withRemote(DriverRemoteConnection.using(cluster));
         }
     }
