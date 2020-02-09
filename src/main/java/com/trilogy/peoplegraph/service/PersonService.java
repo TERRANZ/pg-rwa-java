@@ -18,7 +18,7 @@ public class PersonService {
     private final GraphTraversalSource traversal;
 
     @Autowired
-    PersonService(GraphTraversalSource traversal) {
+    public PersonService(GraphTraversalSource traversal) {
         this.traversal = traversal;
     }
 
