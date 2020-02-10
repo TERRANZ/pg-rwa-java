@@ -14,5 +14,6 @@ public class Person {
     private String lastName;
     private String position;
     private String extId;
+    private String address;
 
 }
