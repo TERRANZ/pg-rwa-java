@@ -57,6 +57,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
     implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
     implementation("org.apache.tinkerpop:tinkergraph-gremlin:${gremlin_version}")
     compile("org.apache.tinkerpop:gremlin-driver:${gremlin_version}")
     compile("commons-io:commons-io:2.6")

@@ -1,0 +1,35 @@
+<h1>persons</h1>
+<div class="container wrapper">
+  <div class="row">
+
+    <!-- Issue table -->
+    <div class="col-md-12">
+      <div class="inner">
+        <h3>My Issues</h3>
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Position</th>
+            <th scope="col">Address</th>
+            <th scope="col">External Id</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let person of persons">
+            <th scope="row">{{person.id}}</th>
+            <td>{{person.firstName}}</td>
+            <td>{{person.lastName}}</td>
+            <td>{{person.position}}</td>
+            <td>{{person.address}}</td>
+            <td>{{person.extId}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

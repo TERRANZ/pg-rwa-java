@@ -1,15 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./modules/login/login.component";
-import {AuthGuardService} from "./services/auth.service";
+import {PersonsComponent} from "./modules/persons/persons.component";
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: 'app/layout/main/main.layout.module#MainLayoutModule',
-    canActivate: [AuthGuardService]
-  },
-  {path: 'login', component: LoginComponent},
+  {path: 'persons', component: PersonsComponent}
 ];
 
 @NgModule({
