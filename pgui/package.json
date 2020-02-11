@@ -31,7 +31,7 @@
     "apollo-cache-inmemory": "^1.6.0",
     "apollo-client": "^2.6.0",
     "apollo-link": "^1.2.11",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.3.1",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.1",
     "font-awesome": "^4.7.0",
