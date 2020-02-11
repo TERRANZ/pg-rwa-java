@@ -10,7 +10,6 @@ import static org.apache.tinkerpop.gremlin.structure.VertexProperty.Cardinality.
 import com.trilogy.peoplegraph.entity.Person;
 import java.util.UUID;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
-import org.apache.tinkerpop.gremlin.structure.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +33,5 @@ public class TestDataGenerator {
                 .property(single, EXT_ID, UUID.randomUUID().toString())
                 .next();
         }
-        System.out.println("Count: " + graphTraversalSource.V().count().next());
     }
 }

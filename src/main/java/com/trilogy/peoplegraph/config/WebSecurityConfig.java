@@ -17,6 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
+    @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
     }
