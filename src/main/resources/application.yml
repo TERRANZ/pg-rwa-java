@@ -1,7 +1,7 @@
 server.port: 5000
 
 neptune:
-  host: host.url
-  port: 1
+  host: localhost
+  port: 8182
   enableSsl: true
-  useEmbed: true
+  useEmbed: false

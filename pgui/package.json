@@ -55,8 +55,6 @@
     "@angular/cli": "^8.3.12",
     "@angular/compiler-cli": "^8.2.11",
     "@angular/language-service": "~8.2.11",
-    "@devfactory/schematics": "^1.5.0",
-    "@devfactory/tslint-devfactory-rules": "^1.2.0",
     "@types/chai": "^4.2.3",
     "@types/jasmine": "^2.8.14",
     "@types/jasminewd2": "~2.0.3",
